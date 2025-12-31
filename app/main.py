@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
 from data_interactor import Contact
@@ -31,9 +31,9 @@ def create_contact(contacts: Items):
 
 
 @app.put("/contacts/{id}")
-def update_contact(id, contacts: Items):
+def update_contact(contacts: Items):
     try:
-        contact = Contact.update_contact(id, contacts.first_name, contacts.last_name, contacts.phone_number)
+        contact = Contact.update_contact(contacts.first_name, contacts.last_name, contacts.phone_number)
         return contact
     except:
         return "put error"
